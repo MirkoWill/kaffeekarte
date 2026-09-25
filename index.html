@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="theme-color" content="#3b2a20">
+  <meta name="description" content="Meine Kaffee-Stempelkarte: 10 Kaffees, einer gratis.">
+  <title>Kaffeekarte</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>Kaffeekarte</h1>
+      <p class="place" id="place"></p>
+    </header>
+
+    <section class="card" aria-labelledby="status">
+      <div class="cups" id="cups" aria-hidden="true"></div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <div class="free" id="free" hidden>
+        <p><strong>Der nächste Kaffee ist gratis! 🎉</strong></p>
+        <button class="btn btn--gold" id="redeem" type="button">Gratis-Kaffee eingelöst</button>
+      </div>
+    </section>
+
+    <button class="btn btn--main" id="add" type="button">☕ Kaffee zählen</button>
+    <button class="btn btn--ghost" id="undo" type="button" hidden>Letzten Kaffee zurücknehmen</button>
+
+    <section class="stats" id="stats"></section>
+
+    <details class="box">
+      <summary>Verlauf</summary>
+      <ul class="log" id="log"></ul>
+    </details>
+
+    <details class="box">
+      <summary>Einstellungen</summary>
+      <label class="field">Name des Bäckers / Cafés
+        <input id="setPlace" maxlength="40" placeholder="z. B. Bäckerei an der Ecke" autocomplete="off">
+      </label>
+      <label class="field">Kaffees bis zum Gratis-Kaffee
+        <select id="setSize"></select>
+      </label>
+      <a class="btn btn--ghost" href="qr.html">📷 QR-Code zum Scannen drucken</a>
+      <button class="btn btn--ghost" id="backup" type="button">Sicherung kopieren</button>
+      <button class="btn btn--ghost" id="restore" type="button">Sicherung einfügen</button>
+      <button class="btn btn--danger" id="reset" type="button">Alles zurücksetzen</button>
+      <p class="hint">Alles wird nur auf diesem Handy gespeichert – kein Konto, kein Server. Tipp: Über das Browser-Menü
+        „Zum Startbildschirm hinzufügen“ wird daraus eine App.</p>
+    </details>
+  </main>
+  <div class="toast" id="toast" role="alert" hidden></div>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
