@@ -52,6 +52,11 @@ body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.45 sys
 .qr-page .tag { border: 1px dashed #bbb; border-radius: 4mm; padding: 3mm; background: #fff; color: #2b1d14; }
 .qr-page .tag svg { display: block; }
 .qr-page .tag small { display: block; font-size: 9pt; margin-top: 1mm; }
+.qr-page .tag--big { padding: 5mm 6mm; }
+.qr-page .tag--big b { display: block; font-size: 16pt; }
+.qr-page .tag--big span { display: block; font-size: 11pt; margin-bottom: 2mm; }
+.qr-page .tag--big svg { margin: 2mm auto 0; }
+.qr-page .tag--big small { font-size: 11pt; margin-top: 2mm; }
 @media print {
   body { background: #fff; }
   .no-print { display: none !important; }

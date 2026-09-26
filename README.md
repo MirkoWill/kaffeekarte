@@ -2,7 +2,8 @@
 
 Digitale Stempelkarte fürs eigene Handy: 10 Kaffees, einer gratis.
 
-- **Kaffee zählen:** großer Knopf oder den gedruckten QR-Code mit der Handy-Kamera scannen (`?kaffee=1`).
+- **Kaffee zählen:** QR-Code ausdrucken und der Verkäuferin geben; beim Kauf hält sie ihn hin, man scannt ihn
+  mit der Handy-Kamera (`?kaffee=1`) und der Kaffee ist gezählt. Alternativ der große Knopf in der App.
 - **Doppelt gescannt?** Innerhalb von 30 Minuten wird nachgefragt; der letzte Kaffee lässt sich zurücknehmen.
 - **Voll:** „Gratis-Kaffee eingelöst“ tippen – die nächste Karte beginnt.
 - **Einstellungen:** Name des Bäckers, Anzahl Felder (5–20), QR-Code drucken, Sicherung kopieren/einfügen.
