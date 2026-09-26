@@ -1,6 +1,6 @@
 // Offline-Fähigkeit: alle Dateien liegen im Speicher; bei neuer Version CACHE hochzählen.
-const CACHE = "kaffeekarte-v1";
-const FILES = ["./", "./index.html", "./style.css?v=1", "./app.js?v=1", "./qr.html", "./qr.js?v=1", "./qrcode.js",
+const CACHE = "kaffeekarte-v2";
+const FILES = ["./", "./index.html", "./style.css?v=2", "./app.js?v=1", "./qr.html", "./qr.js?v=2", "./qrcode.js",
   "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener("activate", (e) => {

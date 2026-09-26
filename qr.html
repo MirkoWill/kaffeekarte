@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'">
   <title>QR-Code drucken · Kaffeekarte</title>
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body class="qr-page">
   <main class="wrap">
     <div class="no-print">
       <h1>QR-Code drucken</h1>
-      <p>Scannst du diesen Code mit der Handy-Kamera, öffnet sich die Kaffeekarte und zählt einen Kaffee.
-        Ausdrucken, ausschneiden und z. B. in die Handyhülle oder ins Portemonnaie legen.</p>
+      <p>Ausdrucken, ausschneiden und der Verkäuferin geben. Beim Kaffeekauf hält sie dir die Karte hin,
+        du scannst sie mit der Handy-Kamera – die Kaffeekarte öffnet sich und zählt einen Kaffee.</p>
+      <p class="hint">Der Code funktioniert nur mit deinem Handy: gezählt wird dort, wo gescannt wird.</p>
       <button class="btn btn--main" id="print" type="button">🖨️ Drucken</button>
       <a class="btn btn--ghost" href="./">Zurück zur Kaffeekarte</a>
     </div>
     <div class="sheet" id="sheet"></div>
   </main>
   <script src="qrcode.js"></script>
-  <script src="qr.js?v=1"></script>
+  <script src="qr.js?v=2"></script>
 </body>
 </html>
