@@ -10,7 +10,21 @@ Digitale Stempelkarte fürs eigene Handy: 10 Kaffees, einer gratis.
 - Alles bleibt **nur auf dem Handy** (localStorage) – kein Server, kein Konto. Funktioniert offline und lässt sich
   über „Zum Startbildschirm hinzufügen“ als App installieren.
 
+## Theken-Version (`/theke/`)
+
+Für den Bäcker: Die App läuft auf dem Handy/Tablet der Verkäuferin, jeder Kunde bekommt eine gedruckte Karte
+mit eigenem QR-Code (Inhalt `KAFFEEKARTE-KUNDE:<Code>`).
+
+- **Scannen:** „Kundenkarte scannen“ öffnet die Kamera; erkannte Karte → Kaffee wird sofort gezählt, der Kunde
+  wird angezeigt (Zurücknehmen möglich, Doppelscan-Schutz 30 Min.). Ohne Kamera: Kunden in der Liste antippen.
+- **Kunden:** Beim ersten Start sind 5 Kunden (Nr. 1–5) angelegt, weitere über „＋ Kunde“. Name/Spitzname freiwillig.
+- **Karten drucken:** Scheckkartenformat, alle oder einzeln (`karten.html`, `karten.html?id=<Code>`).
+- **Statistik:** Kaffees heute, diesen Monat, Gratis-Kaffees; pro Kunde gesamt/Monat/gratis mit Verlauf.
+- **Sicherung:** Als JSON-Datei speichern/laden; Erinnerung nach 7 Tagen. Zurücksetzen mit doppelter Nachfrage.
+- Alles nur auf **einem** Gerät (localStorage), kein Server. QR-Erkennung: `BarcodeDetector`, sonst
+  jsQR von Cosmo Wolfe (Apache-2.0-Lizenz, `theke/jsQR.js`).
+
 Veröffentlicht über GitHub Pages: https://mirkowill.github.io/kaffeekarte/
 
-Neue Version: Dateien ändern, in `index.html`/`sw.js` die `?v=` bzw. `CACHE` hochzählen.
+Neue Version: Dateien ändern, in den HTML-Dateien/`sw.js` die `?v=` bzw. `CACHE` hochzählen.
 QR-Code-Erzeugung: qrcode-generator von Kazuhiko Arase (MIT-Lizenz).

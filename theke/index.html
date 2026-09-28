@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="theme-color" content="#3b2a20">
+  <meta name="description" content="Kaffeekarte für die Theke: Kundenkarten scannen, Kaffees zählen, jeder 10. gratis.">
+  <title>Kaffeekarte · Theke</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <link rel="stylesheet" href="../style.css?v=2">
+  <link rel="stylesheet" href="theke.css?v=1">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>Kaffeekarte · Theke</h1>
+      <p class="place" id="place"></p>
+    </header>
+
+    <p class="banner" id="backupHint" hidden></p>
+
+    <button class="btn btn--main" id="scan" type="button">📷 Kundenkarte scannen</button>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="box box--open" aria-labelledby="custTitle">
+      <div class="row">
+        <h2 id="custTitle">Kunden</h2>
+        <button class="btn btn--ghost btn--small" id="addCust" type="button">＋ Kunde</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Suchen: Name, Nummer oder Code" autocomplete="off">
+      <ul class="clist" id="clist"></ul>
+    </section>
+
+    <details class="box">
+      <summary>Einstellungen</summary>
+      <label class="field">Name des Bäckers / Cafés (steht auf den Karten)
+        <input id="setPlace" maxlength="40" placeholder="z. B. Bäckerei an der Ecke" autocomplete="off">
+      </label>
+      <label class="field">Kaffees bis zum Gratis-Kaffee
+        <select id="setSize"></select>
+      </label>
+      <a class="btn btn--ghost" href="karten.html">🖨️ Alle Kundenkarten drucken</a>
+      <button class="btn btn--ghost" id="export" type="button">💾 Sicherung speichern (Datei)</button>
+      <button class="btn btn--ghost" id="import" type="button">Sicherung laden</button>
+      <input id="importFile" type="file" accept=".json,application/json" hidden>
+      <button class="btn btn--danger" id="reset" type="button">Alles zurücksetzen</button>
+      <p class="hint">Alle Daten liegen nur auf diesem Gerät. Bitte regelmäßig „Sicherung speichern“ – wird der
+        Browser-Speicher gelöscht oder geht das Gerät verloren, hilft nur die Sicherungsdatei.
+        Tipp: Über das Browser-Menü „Zum Startbildschirm hinzufügen“ wird daraus eine App.</p>
+    </details>
+  </main>
+
+  <!-- Kunde -->
+  <section class="panel" id="detail" hidden aria-modal="true" role="dialog" aria-labelledby="dName">
+    <div class="wrap">
+      <div class="row">
+        <button class="btn btn--ghost btn--small" id="dClose" type="button">← Zurück</button>
+        <span class="muted" id="dNo"></span>
+      </div>
+      <h2 class="dname" id="dName"></h2>
+      <div class="card">
+        <div class="cups" id="dCups" aria-hidden="true"></div>
+        <p class="status" id="dStatus" role="status" aria-live="polite"></p>
+        <div class="free" id="dFree" hidden>
+          <p><strong>Gratis-Kaffee fällig! 🎉</strong></p>
+          <button class="btn btn--gold" id="dRedeem" type="button">Gratis-Kaffee ausgegeben</button>
+        </div>
+      </div>
+      <button class="btn btn--main" id="dAdd" type="button">☕ Kaffee zählen</button>
+      <button class="btn btn--ghost" id="dUndo" type="button" hidden>Letzten Kaffee zurücknehmen</button>
+      <section class="stats" id="dStats"></section>
+      <details class="box">
+        <summary>Verlauf</summary>
+        <ul class="log" id="dLog"></ul>
+      </details>
+      <details class="box">
+        <summary>Kunde bearbeiten</summary>
+        <label class="field">Name oder Spitzname (freiwillig)
+          <input id="dRename" maxlength="30" placeholder="z. B. Herr M. mit Hund" autocomplete="off">
+        </label>
+        <a class="btn btn--ghost" id="dPrint" href="karten.html">🖨️ Karte neu drucken</a>
+        <button class="btn btn--danger" id="dDelete" type="button">Kunde löschen</button>
+      </details>
+    </div>
+  </section>
+
+  <!-- Scanner -->
+  <section class="panel panel--scan" id="scanner" hidden aria-modal="true" role="dialog" aria-label="Kundenkarte scannen">
+    <video id="video" playsinline muted></video>
+    <div class="frame" aria-hidden="true"></div>
+    <p class="scanmsg" id="scanMsg">Kundenkarte vor die Kamera halten …</p>
+    <button class="btn btn--main scanclose" id="scanClose" type="button">Abbrechen</button>
+  </section>
+
+  <div class="toast" id="toast" role="alert" hidden></div>
+  <script src="jsQR.js"></script>
+  <script src="store.js?v=1"></script>
+  <script src="theke.js?v=1"></script>
+</body>
+</html>
