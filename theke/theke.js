@@ -23,7 +23,6 @@
 
   // ---------- Übersicht ----------
   function render() {
-    $("#place").textContent = data.place || "";
     $("#stats").innerHTML = `<div class="stat"><b>${count("coffee", startOf("day"))}</b><span>Kaffees heute</span></div>`
       + `<div class="stat"><b>${count("coffee", startOf("month"))}</b><span>diesen Monat</span></div>`
       + `<div class="stat"><b>${count("free", startOf("month"))}</b><span>gratis diesen Monat</span></div>`;
@@ -266,11 +265,9 @@
   // ---------- Einstellungen ----------
   const sizeSel = $("#setSize");
   sizeSel.innerHTML = Store.SIZES.map((n) => `<option value="${n}">${n}</option>`).join("");
-  const placeIn = $("#setPlace");
-  function syncSettings() { sizeSel.value = String(data.size); placeIn.value = data.place; }
+  function syncSettings() { sizeSel.value = String(data.size); }
   syncSettings();
   sizeSel.addEventListener("change", () => { data.size = Number(sizeSel.value); save(); render(); });
-  placeIn.addEventListener("input", () => { data.place = placeIn.value.slice(0, 40); save(); render(); });
 
   // ---------- Hinweis-Leiste ----------
   let toastTimer;

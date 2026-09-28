@@ -17,7 +17,8 @@ mit eigenem QR-Code (Inhalt `KAFFEEKARTE-KUNDE:<Code>`).
 
 - **Scannen:** „Kundenkarte scannen“ öffnet die Kamera; erkannte Karte → Kaffee wird sofort gezählt, der Kunde
   wird angezeigt (Zurücknehmen möglich, Doppelscan-Schutz 30 Min.). Ohne Kamera: Kunden in der Liste antippen.
-- **Karten auf Vorrat:** `karten.html?vorrat=1` druckt Karten mit Zufallscodes – auf jedem Gerät, auch am PC.
+- **Karten auf Vorrat:** `karten.html?vorrat=1` druckt Karten mit Zufallscodes (Standard: 10 Stück, eine A4-Seite)
+  – auf jedem Gerät, auch am PC.
   Eine unbekannte Karte wird beim ersten Scan an der Theke angelegt (Name freiwillig) und zählt den ersten Kaffee.
 - **Kunden:** Liste mit Suche; zusätzlich „＋ Kunde“ direkt an der Theke. Karten vorhandener Kunden lassen sich neu
   drucken (`karten.html`, einzeln `karten.html?id=<Code>`).

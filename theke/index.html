@@ -11,13 +11,12 @@
   <link rel="icon" href="../icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../icon-192.png">
   <link rel="stylesheet" href="../style.css?v=2">
-  <link rel="stylesheet" href="theke.css?v=3">
+  <link rel="stylesheet" href="theke.css?v=4">
 </head>
 <body>
   <main class="wrap">
     <header class="top">
       <h1>Kaffeekarte · Theke</h1>
-      <p class="place" id="place"></p>
     </header>
 
     <p class="banner" id="backupHint" hidden></p>
@@ -37,9 +36,6 @@
 
     <details class="box">
       <summary>Einstellungen</summary>
-      <label class="field">Name des Bäckers / Cafés (steht auf den Karten)
-        <input id="setPlace" maxlength="40" placeholder="z. B. Bäckerei an der Ecke" autocomplete="off">
-      </label>
       <label class="field">Kaffees bis zum Gratis-Kaffee
         <select id="setSize"></select>
       </label>
@@ -103,6 +99,6 @@
   <div class="toast" id="toast" role="alert" hidden></div>
   <script src="jsQR.js"></script>
   <script src="store.js?v=2"></script>
-  <script src="theke.js?v=2"></script>
+  <script src="theke.js?v=3"></script>
 </body>
 </html>
