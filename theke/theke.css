@@ -46,3 +46,33 @@
   .cards-page .sheet { margin: 0; gap: 4mm; }
 }
 .kcard .kline { display: block; width: 100%; padding-bottom: 5mm; border-bottom: 1px solid #999; font-size: 9pt; font-weight: 600; }
+
+/* Kurzanleitung – passt auf eine A4-Seite */
+.guide h1 { font-size: 24px; margin: 0 0 4px; }
+.guide h2 { display: flex; align-items: center; gap: 10px; margin: 16px 0 4px; font-size: 18px; }
+.guide ul { margin: 0; padding-left: 22px; }
+.guide li { margin: 3px 0; }
+.guide .num { display: inline-grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--coffee); color: #fff; font-size: 15px; }
+.ghead { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; margin-top: 16px; }
+.ghead p { margin: 0; }
+.gqr { flex: none; margin: 0; text-align: center; font-size: 11px; color: var(--muted); overflow-wrap: anywhere; max-width: 36mm; }
+.gqr svg { display: block; margin: 0 auto 2px; }
+.gwarn { margin-top: 16px; padding: 2px 14px 12px; border-radius: 14px; background: var(--gold-soft); }
+.gfoot { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line); }
+.gfoot p { margin: 0 0 12px; }
+.gline { display: flex; align-items: flex-end; gap: 8px; }
+.gline span { flex: 1; border-bottom: 1px solid var(--muted); min-height: 1.4em; }
+@media (max-width: 480px) { .ghead { flex-direction: column-reverse; align-items: center; } }
+@media print {
+  @page { size: A4; margin: 12mm 14mm; }
+  .guide-page { font-size: 10.5pt; line-height: 1.35; color: #000; }
+  .guide h1 { font-size: 18pt; }
+  .guide h2 { margin: 9px 0 2px; font-size: 12.5pt; }
+  .guide li { margin: 1px 0; }
+  .gwarn { margin-top: 10px; padding-bottom: 8px; }
+  .gfoot { margin-top: 12px; }
+  .guide { max-width: none; }
+  .guide .num { background: #3b2a20; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .gwarn { background: #fbefd6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ghead { flex-direction: row; }
+}

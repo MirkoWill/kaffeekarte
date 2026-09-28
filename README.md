@@ -24,6 +24,8 @@ mit eigenem QR-Code (Inhalt `KAFFEEKARTE-KUNDE:<Code>`).
 - **Statistik:** Kaffees heute, diesen Monat, Gratis-Kaffees; pro Kunde gesamt/Monat/gratis mit Verlauf.
 - **Sicherung:** Auf dem Handy über „Teilen“ (WhatsApp, Mail …) verschicken, sonst als JSON-Datei herunterladen;
   laden über „Sicherung laden“; Erinnerung nach 7 Tagen. Zurücksetzen mit doppelter Nachfrage.
+- **Kurzanleitung:** `anleitung.html` – eine A4-Seite für die Theke, mit QR-Code zum Öffnen der App und Feld
+  für die Betreuungs-Kontaktdaten.
 - Alles nur auf **einem** Gerät (localStorage), kein Server. QR-Erkennung: `BarcodeDetector`, sonst
   jsQR von Cosmo Wolfe (Apache-2.0-Lizenz, `theke/jsQR.js`).
 

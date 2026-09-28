@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'">
+  <title>Kurzanleitung · Kaffeekarte Theke</title>
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css?v=2">
+  <link rel="stylesheet" href="theke.css?v=3">
+</head>
+<body class="guide-page">
+  <main class="wrap guide">
+    <div class="no-print">
+      <button class="btn btn--main" id="print" type="button">🖨️ Anleitung drucken</button>
+      <a class="btn btn--ghost" href="./">Zurück zur Theke</a>
+    </div>
+
+    <header class="ghead">
+      <div>
+        <h1>☕ Kaffeekarte – Kurzanleitung</h1>
+        <p>Für die Theke: Kundenkarte scannen, Kaffee wird gezählt. Nach <b id="size">10</b> Kaffees ist der nächste gratis.</p>
+      </div>
+      <figure class="gqr"><span id="qr"></span><figcaption>App öffnen:<br><span id="url"></span></figcaption></figure>
+    </header>
+
+    <section>
+      <h2><span class="num">1</span> Einmalig einrichten</h2>
+      <ul>
+        <li>Den QR-Code oben rechts mit der Handy-Kamera scannen – die Kaffeekarte öffnet sich.</li>
+        <li>Im Browser-Menü <b>„Zum Startbildschirm hinzufügen“</b> wählen. Ab dann gibt es ein App-Symbol.</li>
+        <li>Unter <b>Einstellungen</b> den Namen der Bäckerei eintragen.</li>
+        <li>Beim ersten Scannen fragt das Handy nach der <b>Kamera</b> – bitte <b>erlauben</b>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span> Neuer Kunde</h2>
+      <ul>
+        <li>Eine Karte vom Stapel nehmen und <b>„📷 Kundenkarte scannen“</b> tippen.</li>
+        <li>Die App fragt nach einem Namen (freiwillig, z. B. „Herr M.“) → <b>OK</b>.</li>
+        <li>Fertig: Kunde ist angelegt, der erste Kaffee ist schon gezählt. Karte dem Kunden geben.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span> Kaffee zählen</h2>
+      <ul>
+        <li><b>„📷 Kundenkarte scannen“</b> tippen und die Karte vor die Kamera halten.</li>
+        <li>Es erscheint <b>„Kaffee gezählt ✓“</b> – das war’s.</li>
+        <li>Aus Versehen doppelt? <b>„Letzten Kaffee zurücknehmen“</b> tippen.
+          Wird dieselbe Karte innerhalb von 30 Minuten nochmal gescannt, fragt die App vorher nach.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span> Gratis-Kaffee</h2>
+      <ul>
+        <li>Ist die Karte voll, zeigt die App <b>„Gratis-Kaffee fällig 🎉“</b>.</li>
+        <li>Kaffee ausgeben und <b>„Gratis-Kaffee ausgegeben“</b> tippen – die nächste Runde beginnt.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="num">5</span> Karte vergessen oder Kamera streikt?</h2>
+      <ul>
+        <li>In der Kundenliste suchen – nach Name, Nummer oder dem Code auf der Karte – und den Kunden antippen.</li>
+        <li>Dann <b>„☕ Kaffee zählen“</b> tippen.</li>
+      </ul>
+    </section>
+
+    <section class="gwarn">
+      <h2><span class="num">6</span> Einmal pro Woche: Sicherung senden</h2>
+      <ul>
+        <li><b>Einstellungen → „📤 Sicherung senden“</b> tippen und die Datei per WhatsApp oder Mail an die
+          Betreuung (unten) schicken. Die App erinnert daran, wenn es länger her ist.</li>
+        <li>Alle Daten liegen <b>nur auf diesem Handy</b>. Bitte <b>keine Browserdaten löschen</b> und
+          <b>nicht „Alles zurücksetzen“</b> tippen – sonst sind alle Stempel weg.</li>
+      </ul>
+    </section>
+
+    <footer class="gfoot">
+      <p>Bei Fragen oder Problemen – Betreuung:</p>
+      <p class="gline">Name: <span></span> Telefon: <span></span></p>
+    </footer>
+  </main>
+  <script src="../qrcode.js"></script>
+  <script src="store.js?v=2"></script>
+  <script src="anleitung.js?v=1"></script>
+</body>
+</html>
