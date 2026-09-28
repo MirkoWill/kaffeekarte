@@ -1,0 +1,16 @@
+{
+  "name": "Kaffeekarte · Theke",
+  "short_name": "Kaffee-Theke",
+  "description": "Kundenkarten scannen, Kaffees zählen, jeder 10. gratis.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f1ea",
+  "theme_color": "#3b2a20",
+  "lang": "de",
+  "icons": [
+    { "src": "../icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "../icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "../icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
