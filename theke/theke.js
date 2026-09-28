@@ -23,7 +23,6 @@
 
   // ---------- Übersicht ----------
   function render() {
-    $("#place").textContent = data.place || "";
     $("#stats").innerHTML = `<div class="stat"><b>${count("coffee", startOf("day"))}</b><span>Kaffees heute</span></div>`
       + `<div class="stat"><b>${count("coffee", startOf("month"))}</b><span>diesen Monat</span></div>`
       + `<div class="stat"><b>${count("free", startOf("month"))}</b><span>gratis diesen Monat</span></div>`;
@@ -37,7 +36,7 @@
         + `<span class="cname">${esc(label(c))}${full ? ' <span class="badge">🎁 gratis fällig</span>' : ""}</span>`
         + `<span class="cmeta">Nr. ${c.no} · ${Math.min(c.stamps, data.size)} von ${data.size}</span>`
         + `<span class="bar"><i data-pct="${pct}"></i></span></button></li>`;
-    }).join("") : `<li class="empty">${data.customers.length ? "Kein Kunde gefunden." : "Noch keine Kunden – „＋ Kunde“ tippen."}</li>`;
+    }).join("") : `<li class="empty">${data.customers.length ? "Kein Kunde gefunden." : "Noch keine Kunden – einfach eine neue Karte scannen, sie wird dann angelegt."}</li>`;
     // Breite per Skript setzen – die CSP erlaubt kein style="…" im HTML
     document.querySelectorAll("#clist .bar i").forEach((i) => { i.style.width = `${i.dataset.pct}%`; });
     const due = data.customers.length && data.log.length && Date.now() - data.lastBackup > BACKUP_DAYS * 864e5;
@@ -203,32 +202,50 @@
   // true = erledigt (Scanner schließen), false = weiter scannen
   function handleScan(text) {
     const id = Store.parse(text);
-    const c = id && byId(id);
-    if (!c) {
-      if (Date.now() - lastMiss > 1500) {
-        lastMiss = Date.now();
-        $("#scanMsg").textContent = id ? "Diese Karte ist auf diesem Gerät nicht angelegt." : "Das ist keine Kundenkarte.";
-      }
+    if (!id) {
+      if (Date.now() - lastMiss > 1500) { lastMiss = Date.now(); $("#scanMsg").textContent = "Das ist keine Kundenkarte."; }
       return false;
     }
     stopScan();
+    const c = byId(id);
+    if (!c) { registerCard(id); return true; }
     openCustomer(c.id);
     addCoffee(c.id, false);
     return true;
   }
 
-  // ---------- Sicherung ----------
-  function exportData() {
-    data.lastBackup = Date.now();
+  // Neue Karte vom Vorrat: beim ersten Scan anlegen und gleich den ersten Kaffee zählen
+  function registerCard(id) {
+    const name = prompt(`Neue Kundenkarte (Code ${id}).\nName oder Spitzname (freiwillig) – „OK“ legt die Karte an und zählt den ersten Kaffee:`);
+    if (name === null) return;
+    const c = Store.addCustomer(data, name, id);
     save();
-    const blob = new Blob([JSON.stringify(data, null, 1)], { type: "application/json" });
+    openCustomer(c.id);
+    addCoffee(c.id, true);
+  }
+
+  // ---------- Sicherung ----------
+  // Auf dem Handy über „Teilen“ (WhatsApp, Mail …) verschicken, sonst als Datei herunterladen
+  async function exportData() {
+    const name = `kaffeekarte-theke-${new Date().toISOString().slice(0, 10)}.json`;
+    const json = JSON.stringify(data, null, 1);
+    const done = (msg) => { data.lastBackup = Date.now(); save(); render(); toast(msg); };
+    try {
+      const file = new File([json], name, { type: "application/json" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "Kaffeekarte – Sicherung", text: `Sicherung der Kaffeekarte vom ${new Date().toLocaleDateString("de-DE")}` });
+        done("Sicherung verschickt ✓");
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;   // Teilen abgebrochen
+    }
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `kaffeekarte-theke-${new Date().toISOString().slice(0, 10)}.json`;
+    a.href = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+    a.download = name;
     document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-    render();
-    toast("Sicherung gespeichert – die Datei gut aufbewahren (z. B. per Mail an sich selbst).");
+    done("Sicherung gespeichert – die Datei gut aufbewahren (z. B. per Mail verschicken).");
   }
 
   function importData(file) {
@@ -238,7 +255,6 @@
         const d = Store.sanitize(JSON.parse(reader.result));
         if (!d.customers.length) throw new Error("leer");
         if (!confirm(`Sicherung mit ${d.customers.length} Kunden laden? Der jetzige Stand auf diesem Gerät wird ersetzt.`)) return;
-        d.seeded = true;
         data = d; save(); syncSettings(); render();
         toast("Sicherung geladen ✓");
       } catch (e) { toast("Das ist keine gültige Sicherungsdatei."); }
@@ -249,11 +265,9 @@
   // ---------- Einstellungen ----------
   const sizeSel = $("#setSize");
   sizeSel.innerHTML = Store.SIZES.map((n) => `<option value="${n}">${n}</option>`).join("");
-  const placeIn = $("#setPlace");
-  function syncSettings() { sizeSel.value = String(data.size); placeIn.value = data.place; }
+  function syncSettings() { sizeSel.value = String(data.size); }
   syncSettings();
   sizeSel.addEventListener("change", () => { data.size = Number(sizeSel.value); save(); render(); });
-  placeIn.addEventListener("input", () => { data.place = placeIn.value.slice(0, 40); save(); render(); });
 
   // ---------- Hinweis-Leiste ----------
   let toastTimer;
@@ -309,7 +323,7 @@
     if (!confirm("Wirklich ALLES löschen – alle Kunden, Stempel und den Verlauf? Die gedruckten Karten funktionieren danach nicht mehr.")) return;
     if (!confirm("Ganz sicher? Das lässt sich nur mit einer Sicherungsdatei rückgängig machen.")) return;
     localStorage.removeItem(Store.KEY);
-    data = Store.load(); syncSettings(); render(); toast("Zurückgesetzt – 5 neue Kunden angelegt.");
+    data = Store.load(); syncSettings(); render(); toast("Zurückgesetzt.");
   });
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
