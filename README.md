@@ -17,10 +17,13 @@ mit eigenem QR-Code (Inhalt `KAFFEEKARTE-KUNDE:<Code>`).
 
 - **Scannen:** „Kundenkarte scannen“ öffnet die Kamera; erkannte Karte → Kaffee wird sofort gezählt, der Kunde
   wird angezeigt (Zurücknehmen möglich, Doppelscan-Schutz 30 Min.). Ohne Kamera: Kunden in der Liste antippen.
-- **Kunden:** Beim ersten Start sind 5 Kunden (Nr. 1–5) angelegt, weitere über „＋ Kunde“. Name/Spitzname freiwillig.
-- **Karten drucken:** Scheckkartenformat, alle oder einzeln (`karten.html`, `karten.html?id=<Code>`).
+- **Karten auf Vorrat:** `karten.html?vorrat=1` druckt Karten mit Zufallscodes – auf jedem Gerät, auch am PC.
+  Eine unbekannte Karte wird beim ersten Scan an der Theke angelegt (Name freiwillig) und zählt den ersten Kaffee.
+- **Kunden:** Liste mit Suche; zusätzlich „＋ Kunde“ direkt an der Theke. Karten vorhandener Kunden lassen sich neu
+  drucken (`karten.html`, einzeln `karten.html?id=<Code>`).
 - **Statistik:** Kaffees heute, diesen Monat, Gratis-Kaffees; pro Kunde gesamt/Monat/gratis mit Verlauf.
-- **Sicherung:** Als JSON-Datei speichern/laden; Erinnerung nach 7 Tagen. Zurücksetzen mit doppelter Nachfrage.
+- **Sicherung:** Auf dem Handy über „Teilen“ (WhatsApp, Mail …) verschicken, sonst als JSON-Datei herunterladen;
+  laden über „Sicherung laden“; Erinnerung nach 7 Tagen. Zurücksetzen mit doppelter Nachfrage.
 - Alles nur auf **einem** Gerät (localStorage), kein Server. QR-Erkennung: `BarcodeDetector`, sonst
   jsQR von Cosmo Wolfe (Apache-2.0-Lizenz, `theke/jsQR.js`).
 
